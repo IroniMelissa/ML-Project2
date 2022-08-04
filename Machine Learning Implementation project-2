@@ -1,0 +1,1292 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "90f030b8",
+   "metadata": {},
+   "source": [
+    "### Import Data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "2e28a529",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>age</th>\n",
+       "      <th>gender</th>\n",
+       "      <th>genre</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>20</td>\n",
+       "      <td>1</td>\n",
+       "      <td>HipHop</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>23</td>\n",
+       "      <td>1</td>\n",
+       "      <td>HipHop</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>25</td>\n",
+       "      <td>1</td>\n",
+       "      <td>HipHop</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>26</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Jazz</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>29</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Jazz</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>30</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Jazz</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>31</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Classical</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>33</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Classical</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>37</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Classical</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>20</td>\n",
+       "      <td>0</td>\n",
+       "      <td>Dance</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>10</th>\n",
+       "      <td>21</td>\n",
+       "      <td>0</td>\n",
+       "      <td>Dance</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>11</th>\n",
+       "      <td>25</td>\n",
+       "      <td>0</td>\n",
+       "      <td>Dance</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>12</th>\n",
+       "      <td>26</td>\n",
+       "      <td>0</td>\n",
+       "      <td>Acoustic</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>13</th>\n",
+       "      <td>27</td>\n",
+       "      <td>0</td>\n",
+       "      <td>Acoustic</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>14</th>\n",
+       "      <td>30</td>\n",
+       "      <td>0</td>\n",
+       "      <td>Acoustic</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>15</th>\n",
+       "      <td>31</td>\n",
+       "      <td>0</td>\n",
+       "      <td>Classical</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>16</th>\n",
+       "      <td>34</td>\n",
+       "      <td>0</td>\n",
+       "      <td>Classical</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>17</th>\n",
+       "      <td>35</td>\n",
+       "      <td>0</td>\n",
+       "      <td>Classical</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "    age  gender      genre\n",
+       "0    20       1     HipHop\n",
+       "1    23       1     HipHop\n",
+       "2    25       1     HipHop\n",
+       "3    26       1       Jazz\n",
+       "4    29       1       Jazz\n",
+       "5    30       1       Jazz\n",
+       "6    31       1  Classical\n",
+       "7    33       1  Classical\n",
+       "8    37       1  Classical\n",
+       "9    20       0      Dance\n",
+       "10   21       0      Dance\n",
+       "11   25       0      Dance\n",
+       "12   26       0   Acoustic\n",
+       "13   27       0   Acoustic\n",
+       "14   30       0   Acoustic\n",
+       "15   31       0  Classical\n",
+       "16   34       0  Classical\n",
+       "17   35       0  Classical"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "music_data = pd.read_csv('music.csv')\n",
+    "music_data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3cd97c3a",
+   "metadata": {},
+   "source": [
+    "### Preparing Data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "354d1dbf",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<class 'pandas.core.frame.DataFrame'>\n",
+      "RangeIndex: 18 entries, 0 to 17\n",
+      "Data columns (total 3 columns):\n",
+      " #   Column  Non-Null Count  Dtype \n",
+      "---  ------  --------------  ----- \n",
+      " 0   age     18 non-null     int64 \n",
+      " 1   gender  18 non-null     int64 \n",
+      " 2   genre   18 non-null     object\n",
+      "dtypes: int64(2), object(1)\n",
+      "memory usage: 560.0+ bytes\n"
+     ]
+    }
+   ],
+   "source": [
+    "music_data.info()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "894efc4c",
+   "metadata": {},
+   "source": [
+    "### EDA"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "c8e9cc42",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import matplotlib.pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "3c04be65",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<matplotlib.collections.PathCollection at 0x1fa17419220>"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "plt.scatter(music_data['age'],music_data['genre'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "f1d5e2e8",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<matplotlib.collections.PathCollection at 0x1fa1748f9a0>"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "plt.scatter(music_data['gender'],music_data['genre'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "09c605f8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X = music_data[['age','gender']]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "6c65066c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "y= music_data['genre']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "a699bab9",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>age</th>\n",
+       "      <th>gender</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>20</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>23</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>25</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>26</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>29</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>30</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>31</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>33</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>37</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>20</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>10</th>\n",
+       "      <td>21</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>11</th>\n",
+       "      <td>25</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>12</th>\n",
+       "      <td>26</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>13</th>\n",
+       "      <td>27</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>14</th>\n",
+       "      <td>30</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>15</th>\n",
+       "      <td>31</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>16</th>\n",
+       "      <td>34</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>17</th>\n",
+       "      <td>35</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "    age  gender\n",
+       "0    20       1\n",
+       "1    23       1\n",
+       "2    25       1\n",
+       "3    26       1\n",
+       "4    29       1\n",
+       "5    30       1\n",
+       "6    31       1\n",
+       "7    33       1\n",
+       "8    37       1\n",
+       "9    20       0\n",
+       "10   21       0\n",
+       "11   25       0\n",
+       "12   26       0\n",
+       "13   27       0\n",
+       "14   30       0\n",
+       "15   31       0\n",
+       "16   34       0\n",
+       "17   35       0"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "1c5a34c7",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0        HipHop\n",
+       "1        HipHop\n",
+       "2        HipHop\n",
+       "3          Jazz\n",
+       "4          Jazz\n",
+       "5          Jazz\n",
+       "6     Classical\n",
+       "7     Classical\n",
+       "8     Classical\n",
+       "9         Dance\n",
+       "10        Dance\n",
+       "11        Dance\n",
+       "12     Acoustic\n",
+       "13     Acoustic\n",
+       "14     Acoustic\n",
+       "15    Classical\n",
+       "16    Classical\n",
+       "17    Classical\n",
+       "Name: genre, dtype: object"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "y"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f8c6988a",
+   "metadata": {},
+   "source": [
+    "### Train/test split"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "adcabcab",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.model_selection import train_test_split\n",
+    "X_train, X_test, y_train, y_test = train_test_split(\n",
+    "  X, y, test_size=0.33, random_state=42)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "a90b2e20",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>age</th>\n",
+       "      <th>gender</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>16</th>\n",
+       "      <td>34</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>15</th>\n",
+       "      <td>31</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>11</th>\n",
+       "      <td>25</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>25</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>20</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>17</th>\n",
+       "      <td>35</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>29</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>12</th>\n",
+       "      <td>26</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>33</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>10</th>\n",
+       "      <td>21</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>14</th>\n",
+       "      <td>30</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>31</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "    age  gender\n",
+       "16   34       0\n",
+       "15   31       0\n",
+       "11   25       0\n",
+       "2    25       1\n",
+       "9    20       0\n",
+       "17   35       0\n",
+       "4    29       1\n",
+       "12   26       0\n",
+       "7    33       1\n",
+       "10   21       0\n",
+       "14   30       0\n",
+       "6    31       1"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X_train"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "1ff1d8e0",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>age</th>\n",
+       "      <th>gender</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>20</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>23</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>37</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>30</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>26</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>13</th>\n",
+       "      <td>27</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "    age  gender\n",
+       "0    20       1\n",
+       "1    23       1\n",
+       "8    37       1\n",
+       "5    30       1\n",
+       "3    26       1\n",
+       "13   27       0"
+      ]
+     },
+     "execution_count": 25,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X_test"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6843a286",
+   "metadata": {},
+   "source": [
+    "### Train the model"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "44fa1380",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.tree import DecisionTreeClassifier"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "96f17595",
+   "metadata": {},
+   "source": [
+    "### Creating instance of decision tree model"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "ca5d73ce",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "model = DecisionTreeClassifier()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "d161467f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "DecisionTreeClassifier()"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "model.fit(X_train,y_train)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1fe07dd0",
+   "metadata": {},
+   "source": [
+    "### model prediction performance"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "9c4ea871",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1.0"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "model.score(X_train,y_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "b4aba768",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1.0"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "model.score(X_test,y_test)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b892ca21",
+   "metadata": {},
+   "source": [
+    "### Compare the results"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "de0cd0c5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "y_prediction = model.predict(X_test)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "ba295082",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['HipHop', 'HipHop', 'Classical', 'Jazz', 'Jazz', 'Acoustic'],\n",
+       "      dtype=object)"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "y_prediction"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "86b4f711",
+   "metadata": {},
+   "source": [
+    "### Compare actual value and predicted value using a data frame"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "b7c24e25",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dft = pd.DataFrame({'Actual':y_test,'Prediction':y_prediction})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "0198e069",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Actual</th>\n",
+       "      <th>Prediction</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>HipHop</td>\n",
+       "      <td>HipHop</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>HipHop</td>\n",
+       "      <td>HipHop</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>Classical</td>\n",
+       "      <td>Classical</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>Jazz</td>\n",
+       "      <td>Jazz</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Jazz</td>\n",
+       "      <td>Jazz</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>13</th>\n",
+       "      <td>Acoustic</td>\n",
+       "      <td>Acoustic</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       Actual Prediction\n",
+       "0      HipHop     HipHop\n",
+       "1      HipHop     HipHop\n",
+       "8   Classical  Classical\n",
+       "5        Jazz       Jazz\n",
+       "3        Jazz       Jazz\n",
+       "13   Acoustic   Acoustic"
+      ]
+     },
+     "execution_count": 27,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "dft"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5768e7ad",
+   "metadata": {},
+   "source": [
+    "### Prediction on new samples"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "id": "c94cebb4",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['HipHop'], dtype=object)"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "model.predict([[21,1]])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "id": "afc9c8f6",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['Classical'], dtype=object)"
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "model.predict([[35,0]])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8ca6b380",
+   "metadata": {},
+   "source": [
+    "### Save the model using joblib"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "1c7fc5bd",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import joblib\n",
+    "joblib.dump(model,'model_job')\n",
+    "model = joblib.load('model_job')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "e21bddff",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['HipHop'], dtype=object)"
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "model.predict([[25,1]])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3ecf09e3",
+   "metadata": {},
+   "source": [
+    "### Train the model for entire data set"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "be71fbcc",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X = music_data[['age','gender']]\n",
+    "y = music_data['genre']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "id": "bbaf0348",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "model = DecisionTreeClassifier()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "id": "c6c2a2a1",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "DecisionTreeClassifier()"
+      ]
+     },
+     "execution_count": 36,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "model.fit(X,y)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "358a8153",
+   "metadata": {},
+   "source": [
+    "### save the model"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "id": "23e04aba",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import joblib\n",
+    "joblib.dump(model,'model_job')\n",
+    "model = joblib.load('model_job')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "id": "3b8f1cdd",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['HipHop'], dtype=object)"
+      ]
+     },
+     "execution_count": 38,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "model.predict([[23,1]])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "bf17200a",
+   "metadata": {},
+   "source": [
+    "### GUI with tkinter"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "id": "17045c2c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "genre is  ['Dance']\n"
+     ]
+    }
+   ],
+   "source": [
+    "import joblib\n",
+    "def show_entry_fields():\n",
+    "    a1=int(r1.get())\n",
+    "    a2=str(r2.get())\n",
+    "    \n",
+    "    model = joblib.load('model_job')\n",
+    "    result = model.predict([[a1,a2]])\n",
+    "    \n",
+    "    Label(master,text='Genre is ').grid(row=4)\n",
+    "    Label(master,text=result).grid(row=5)\n",
+    "    \n",
+    "    print(\"genre is \",result)\n",
+    "    \n",
+    "    \n",
+    "    \n",
+    "from tkinter import *\n",
+    "\n",
+    "master = Tk()\n",
+    "master.title(\"Predict genre accroding to age & gender.\")\n",
+    "label = Label(master,text=\"Predict genre accroding to age & gender\",bg='white',fg='black').grid(row=0,columnspan=2)\n",
+    "\n",
+    "Label(master, text= \"Enter age\").grid(row=1)\n",
+    "Label(master, text= \"Enter gender\").grid(row=2)\n",
+    "\n",
+    "r1 = Entry(master)\n",
+    "r2 = Entry(master)\n",
+    "\n",
+    "r1.grid(row=1,column=1)\n",
+    "r2.grid(row=2,column=1)\n",
+    "Button(master, text='predict',command=show_entry_fields).grid()\n",
+    "\n",
+    "mainloop()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f80f9415",
+   "metadata": {},
+   "source": [
+    "### Visualizing a Decision Tree"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "id": "144060d1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn import tree\n",
+    "tree.export_graphviz(model,out_file='music_recommender.dot',\n",
+    "                     feature_names=['age','gender'],\n",
+    "                     class_names=sorted(y.unique()),\n",
+    "                     label='all',rounded=True,\n",
+    "                     filled=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e1165066",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
