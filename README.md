@@ -1,2 +1,3 @@
 # ML-Project2
- Decision Tree Classifier Model model developed using Python .
+ Decision Tree Classifier Model developed using Python .
+ Followed basic Machine Learning steps to implementation.
